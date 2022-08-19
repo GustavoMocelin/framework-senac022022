@@ -5,7 +5,7 @@ namespace App\FrameworkTools\Implementations\FactoryMethods;
 trait BreakStringInVars{
 
     public function breakStringInVars($requestUri){
-        explode($requestUri, "?");
+        $urlAndVars = explode("?",$requestUri);
 
 
         if(!isset($urlAndVars[1]) ){
@@ -14,13 +14,16 @@ trait BreakStringInVars{
 
         $stringWithVars = $urlAndVars[1];
 
-        $stringWithVars = explode("&", $stringWithVars);
+        $arrayWithVars = explode("&", $stringWithVars);
 
-        $varsOfUrl = array_map(function($element){
-            return explode("=",$element);
+        return array_map(function($element){
+            $nameAndValue = explode("=",$element);
+            return[
+                "name" => $nameAndValue[0],
+                "value" => $nameAndValue[1]
+            ];
         },$arrayWithVars);
 
-        DD("LSKCKD");
     }
 
 }
