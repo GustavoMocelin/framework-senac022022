@@ -28,6 +28,10 @@ class ProcessServerElements {
         return ProcessServerElements::$instance;
     }
 
+    public function getInputJSONData(){
+        return (array) json_decode(file_get_contents('php://input'), true);
+    }
+
     public function setDocumentRoot($documentRoot){
         $this->documentRoot = $documentRoot;
     }
