@@ -2,6 +2,8 @@
 
 $mainPosition = __DIR__;//posição diretorio/repositorio
 
+error_reporting(E_ERROR | E_PARSE);
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 
