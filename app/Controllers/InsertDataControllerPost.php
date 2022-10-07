@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\FrameworkTools\Abstracts\Controllers\AbstractControllers;
 
-class InsertDataController extends AbstractControllers{
+class InsertDataControllerPost extends AbstractControllers{
 
     private $params;
     private $attrName;
