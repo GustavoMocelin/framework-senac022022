@@ -14,10 +14,8 @@ class ProcessServerElements {
     private $verb;
     private $route;
 
-
     private function __construct(){
-        //SINGLETON
-        
+        //SINGLETON        
     }
 
     public static function start(){
@@ -29,7 +27,8 @@ class ProcessServerElements {
     }
 
     public function getInputJSONData(){
-        return (array) json_decode(file_get_contents('php://input'), true);
+
+        return (array)json_decode(file_get_contents('php://input'), TRUE);
     }
 
     public function setDocumentRoot($documentRoot){
@@ -49,23 +48,20 @@ class ProcessServerElements {
 
         return $this->serverName;
     }
-    
+
     public function setHttpHost($httpHost){
         $this->httpHost = $httpHost;
     }
 
-    public function gethttpHost(){
-
+    public function getHttpHost(){
         return $this->httpHost;
     }
-
 
     public function setUri($uri){
         $this->uri = $uri;
     }
 
     public function getUri(){
-
         return $this->uri;
     }
 
@@ -74,7 +70,6 @@ class ProcessServerElements {
     }
 
     public function getVariables(){
-
         return $this->variables;
     }
 
@@ -83,20 +78,14 @@ class ProcessServerElements {
     }
 
     public function getVerb(){
-
         return $this->verb;
-    }
-
+    } 
+    
     public function setRoute($route){
         $this->route = $route;
     }
 
     public function getRoute(){
-
         return $this->route;
-    }
-
-
-
-
+    }    
 }

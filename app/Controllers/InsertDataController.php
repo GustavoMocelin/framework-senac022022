@@ -8,73 +8,49 @@ use App\FrameworkTools\Database\DatabaseConnection;
 class InsertDataController extends AbstractControllers{
 
     public function exec (){
-       
         $pdo = DatabaseConnection::start()->getPDO();
         //dd($pdo); 
         $params = $this->processServerElements->getInputJSONData();
        // dd($params);
-       $response = ['success'=>true];
+       $response = ['success' => true];
        $attrName;
 
-       try{
-       if(!$params['name'] ){
-            $attrName = 'name';
-            throw new \Exception('Digite o nome');
+       try {
+
+            if(!$params['name']){
+                $attrName = 'name';
+                throw new \Exception("the name has to be send in the request");
+            }
+        
+            if(!$params['last_name']){
+                $attrName = 'last_name';
+                throw new \Exception("the last_name has to be send in the request");
+             }
+         
+            if(!$params['age']){
+                $attrName = 'age';
+                throw new \Exception("the age has to be send in the request");
+             }
+         
+         
+             $query = "INSERT INTO user (name,last_name,age) VALUES (:name,:last_name,:age)";
+         
+             $statement = $pdo->prepare($query);
+         
+             $statement->execute([
+                   ':name' => $params["name"],
+                   ':last_name' => $params["lastName"],
+                   ':age' => $params["age"]
+              ]);
+
+        } catch(\Exception $e){
+            $response = [
+                'success' => false,
+                'message' => $e->getMessage(),
+                'missinAttribute' => $attrName
+            ];
         }
-
-        if(!$params['last_name'] ){
-            $attrName = 'last_name';
-            throw new \Exception('Digite o ultimo nome');
-        }
-
-        if(!$params['age'] ){
-            $attrName = 'age';
-            throw new \Exception('Digite a idade');
-        }
-
-
-       $query = "INSERT INTO user (name,last_name,age) VALUES (:name,:last_name,:age)";
-
-       $statement = $pdo->prepare($query);
-
-       $statement->execute([
-            ':name' => $params["name"],
-            ':last_name' => $params["lastName"],
-            ':age' => $params["age"]
-       ]);
-
-    }catch(\Exception $e){
-        $response = [
-            'success' => false,
-            'message' => $e->getMessage(),
-            'missingAtribute' => $attrName
-        ];
-    }
-
 
         view($response);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

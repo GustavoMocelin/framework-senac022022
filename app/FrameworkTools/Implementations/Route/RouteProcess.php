@@ -6,43 +6,38 @@ use App\FrameworkTools\ProcessServerElements;
 use App\Controllers\HelloWorldController;
 use App\Controllers\InsertDataController;
 
-class RouteProcess
-{
+
+class RouteProcess{
 
     public static function execute(){
-        $processServerElements = ProcessServerElements::start();   
 
+        $processServerElements = ProcessServerElements::start();
         $routeArray = [];
 
-        //dd($processServerElements->getRoute());
+        switch ($processServerElements->getVerb()){
 
-        switch($processServerElements->getVerb()){
-            
-            case 'GET';
+            case 'GET':
 
-            switch($processServerElements->getRoute()){
-                case '/hello-world';
+                switch($processServerElements->getRoute()){
+                    //dd([$processServerElements->getVerb()]);
 
-                return (new HelloWorldController)->execute();
-            break;
-            }
-            
-            case 'POST';
+                    case '/hello-world':
+                        return (new HelloWorldController)->execute();
+                    break;
+                }
+            case 'POST':
 
-            switch($processServerElements->getRoute()){
-              /*  case '/rota-desafio';
-                    return (new HelloWorldController)->execute();
-                break;
-*/
-                case '/insert-data';
-                    return (new InsertDataController)->exec();
-                break;
+                switch($processServerElements->getRoute()){
+                        //dd([$processServerElements->getVerb()]);
+    
+                    case '/insert-data':
+                        return (new InsertDataController ) -> exec();
+                    break;
+                }
+               
             }
 
-
-            
-          
-        }       
-
+        //dd([$getRoutes]);
     }
+
 }

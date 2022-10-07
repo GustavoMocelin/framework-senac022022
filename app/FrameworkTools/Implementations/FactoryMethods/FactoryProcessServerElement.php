@@ -19,6 +19,7 @@ class FactoryProcessServerElement extends AbstractFactoryMethods {
     }
 
     public function operation() {
+        //dd($_SERVER);
         //Vamos fazer mais codigo aqui
         $this->processServerElements->setDocumentRoot($_SERVER['DOCUMENT_ROOT']);
         $this->processServerElements->setServerName($_SERVER['SERVER_NAME']);
@@ -27,11 +28,10 @@ class FactoryProcessServerElement extends AbstractFactoryMethods {
 
         $variables = $this->breakStringInVars($_SERVER['REQUEST_URI']);
 
-
         $this->processServerElements->setVariables($variables);
-        $this->processServerElements->setVerb($_SERVER['REQUEST_METHOD']);
-        $this->processServerElements->setRoute(explode("?", $_SERVER['REQUEST_URI'])[0]);     ;
-       
+        $this->processServerElements->setVerb($_SERVER["REQUEST_METHOD"]);
+        $this->processServerElements->setRoute(explode("?",$_SERVER['REQUEST_URI'])[0]);
+        
     }
     
     // -> nao estático

@@ -9,6 +9,6 @@ function env($nameOfVariable) {
     return $_ENV[$nameOfVariable];
 }
 
-function  view($input){
+function view ($input){
     echo json_encode($input);
 }
