@@ -66,4 +66,3 @@ class InsertDataController extends AbstractControllers{
 
         }
 }
-

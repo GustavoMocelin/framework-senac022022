@@ -3,50 +3,34 @@
 namespace App\FrameworkTools\Implementations\Route;
 
 use App\FrameworkTools\ProcessServerElements;
-use App\Controllers\HelloWorldController;
-use App\Controllers\InsertDataController;
-use APP\Controllers\InsertDataControllerPost;
 
+use App\FrameworkTools\Implementations\Route\Get;
+use App\FrameworkTools\Implementations\Route\Post;
+use App\FrameworkTools\Implementations\Route\Put;
 
-class RouteProcess{
+class RouteProcess {
 
-    public static function execute(){
+    use Get;
+    use Post;
+    use Put;
 
-        $processServerElements = ProcessServerElements::start();
+    private static $processServerElements;
+
+    public static function execute() {
+        self::$processServerElements = ProcessServerElements::start();
         $routeArray = [];
 
-        switch ($processServerElements->getVerb()){
-
+        switch (self::$processServerElements->getVerb()) {
             case 'GET':
-
-                switch($processServerElements->getRoute()){
-                    //dd([$processServerElements->getVerb()]);
-
-                    case '/hello-world':
-                        return (new HelloWorldController)->execute();
-                    break;
-                }
-            break;    
-
+                return self::get();
             case 'POST':
-
-                switch($processServerElements->getRoute()){
-                        //dd([$processServerElements->getVerb()]);
-    
-                    case '/insert-data':
-                        return (new InsertDataController )->exec();
-                    break;
-
-                    case '/carinsert':
-                        return (new InsertDataControllerPost)->exec();
-                    break;               
-                    
-
-                }
-            break;   
-            }
-
-        //dd([$getRoutes]);
+                return self::post();
+            case 'PUT':
+                return self::put();
+        }
     }
+            
 
+   
+            
 }

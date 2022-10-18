@@ -41,12 +41,12 @@ class InsertDataControllerPost extends AbstractControllers{
         private function verificationInputVar() {
             if (!$this->params['carName']) {
                 $this->attrName = 'carName';
-                throw new \Exception('the carName has to ben send in the request');
+                throw new \Exception('informe o nome do carro');
             }
 
             if (!$this->params['model']) {
                 $this->attrName = 'model';
-                throw new \Exception('the model has to be send in the request');
+                throw new \Exception('informe o modelo do carro');
             }
 
             
